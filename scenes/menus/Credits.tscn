@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://credits_scene"]
+
+[ext_resource type="Script" path="res://scenes/menus/Credits.gd" id="1_credits"]
+
+[node name="Credits" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_credits")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.08, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 0
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CRÉDITOS Y LICENCIAS"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.8, 0.1, 0.1, 1)
+
+[node name="Separator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreditsText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+bbcode_enabled = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+fit_content = true
+text = "[b]ZOMBIE ROGUELIKE[/b]
+
+[b]Desarrollo:[/b]
+  Alejandro
+
+[b]Motor:[/b]
+  Godot Engine 4.7
+  Licencia: MIT License
+  https://godotengine.org
+
+[b]Recursos de Audio:[/b]
+  Kenney.nl - Game Assets
+  Licencia: CC0 1.0 Universal (Public Domain)
+  https://kenney.nl
+
+[b]Fuentes:[/b]
+  Godot Default Font
+  Licencia: MIT License
+
+[b]Inspiración:[/b]
+  Basado en juegos roguelike clásicos.
+
+[b]LICENCIAS DE TERCEROS:[/b]
+
+[b]MIT License (Godot Engine)[/b]
+Copyright (c) 2014-present Godot Engine contributors
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files, to deal in the Software
+without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software.
+
+[b]CC0 1.0 Universal (Kenney Assets)[/b]
+El creador renuncia a todos los derechos de autor y derechos relacionados
+en la medida en que lo permite la ley. Puedes copiar, modificar, distribuir
+y ejecutar el trabajo, incluso con fines comerciales, sin pedir permiso."
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 45)
+text = "← Volver al Menú"
