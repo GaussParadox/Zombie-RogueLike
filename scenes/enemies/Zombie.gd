@@ -40,6 +40,7 @@ var current_health: float
 
 var _player: CharacterBody2D = null
 var _touching_player: bool   = false
+var _groan_cooldown: float   = 0.0
 
 
 # ===========================================================================
@@ -49,6 +50,9 @@ var _touching_player: bool   = false
 func _ready() -> void:
 	current_health = max_health
 	add_to_group("enemies")
+
+	# Variar el cooldown inicial para que no coincidan todos los zombis
+	_groan_cooldown = randf_range(0.5, 3.5)
 
 	# Configurar timer de daño
 	_dmg_timer.wait_time   = damage_interval
@@ -61,16 +65,24 @@ func _ready() -> void:
 	_hitbox.body_exited.connect(_on_hitbox_body_exited)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if _player == null or not is_instance_valid(_player):
 		return
 
 	# --- IA de persecución: moverse directo al jugador ---
-	var dir := (_player.global_position - global_position).normalized()
+	var to_player := _player.global_position - global_position
+	var dist := to_player.length()
+	var dir := to_player.normalized()
 	velocity = dir * speed
 
 	# Rotar sprite para mirar al jugador
 	_sprite.rotation = dir.angle()
+
+	# Gruñido procedimental al acercarse al jugador (< 240 px)
+	_groan_cooldown -= delta
+	if _groan_cooldown <= 0.0 and dist < 240.0:
+		AudioManager.play_zombie_groan(randf_range(0.85, 1.15))
+		_groan_cooldown = randf_range(4.0, 7.0)
 
 	move_and_slide()
 
@@ -99,6 +111,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body == _player:
 		_touching_player = true
 		_dmg_timer.start()
+		AudioManager.play_zombie_groan(randf_range(1.05, 1.25), 1.0)
 		# Golpe inmediato al entrar en contacto
 		if _player.has_method("take_damage"):
 			_player.take_damage(damage_per_hit)

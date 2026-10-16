@@ -274,6 +274,8 @@ func _fire() -> void:
 	# Se agrega al padre (Game) para que el proyectil no se mueva con el jugador
 	get_parent().add_child(bullet)
 
+	AudioManager.play_shoot(randf_range(0.96, 1.04))
+
 	_fire_rate_timer.start(fire_rate)
 
 	if current_ammo <= 0:
@@ -315,6 +317,7 @@ func take_damage(amount: float) -> void:
 		current_shield -= absorbed
 		amount          -= absorbed
 		shield_changed.emit(current_shield, max_shield)
+		AudioManager.play_shield_hit()
 
 	# El daño restante va a la salud
 	if amount > 0.0:

@@ -39,6 +39,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	AudioManager.play_bullet_hit(randf_range(0.95, 1.05))
 	# Aplica daño a cualquier nodo con take_damage (zombis, destructibles, etc.)
 	if body.has_method("take_damage"):
 		body.take_damage(damage)

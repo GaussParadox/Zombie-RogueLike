@@ -1,6 +1,7 @@
 extends Control
 
 func _ready() -> void:
+	AudioManager.play_menu_music()
 	$VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
 	$VBoxContainer/CreditsButton.pressed.connect(_on_credits_pressed)
 	$VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)

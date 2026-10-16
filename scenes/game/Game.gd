@@ -52,6 +52,8 @@ var _game_ended: bool       = false   # evita doble transición
 # ===========================================================================
 
 func _ready() -> void:
+	AudioManager.play_game_music()
+
 	# Conectar señales del jugador
 	_player.died.connect(_on_player_died)
 
