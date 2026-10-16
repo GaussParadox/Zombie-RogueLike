@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://player_scene"]
+
+[ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_player"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = CapsuleShape2D new()
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = true
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_horizontal_offset = 0.0
+drag_vertical_offset = 0.0
+
+[node name="DashTimer" type="Timer" parent="."]
+one_shot = true
+autostart = false
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+one_shot = true
+autostart = false
+
+[node name="SlideTimer" type="Timer" parent="."]
+one_shot = true
+autostart = false
+
+[node name="SlideCooldownTimer" type="Timer" parent="."]
+one_shot = true
+autostart = false
