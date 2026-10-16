@@ -1,6 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://player_scene"]
+[gd_scene load_steps=3 format=3 uid="uid://player_scene"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_player"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
+radius = 16.0
+height = 32.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 1
@@ -8,20 +12,24 @@ collision_mask = 2
 script = ExtResource("1_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = CapsuleShape2D new()
+shape = SubResource("CapsuleShape2D_1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+
+[node name="BodyVisual" type="Polygon2D" parent="Sprite2D"]
+color = Color(0.2, 0.6, 1, 1)
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[node name="GunPointer" type="Polygon2D" parent="Sprite2D"]
+color = Color(1, 0.85, 0.2, 1)
+polygon = PackedVector2Array(16, -4, 25, 0, 16, 4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-enabled = true
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-drag_horizontal_offset = 0.0
-drag_vertical_offset = 0.0
 
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
@@ -36,5 +44,13 @@ one_shot = true
 autostart = false
 
 [node name="SlideCooldownTimer" type="Timer" parent="."]
+one_shot = true
+autostart = false
+
+[node name="FireRateTimer" type="Timer" parent="."]
+one_shot = true
+autostart = false
+
+[node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
 autostart = false

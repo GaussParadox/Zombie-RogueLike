@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://zombie_scene"]
+
+[ext_resource type="Script" path="res://scenes/enemies/Zombie.gd" id="1_zombie"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 14.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitbox"]
+radius = 15.0
+height = 30.0
+
+[node name="Zombie" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_zombie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="BodyVisual" type="Polygon2D" parent="Sprite2D"]
+color = Color(0.25, 0.75, 0.25, 1)
+polygon = PackedVector2Array(-14, -14, 14, -14, 14, 14, -14, 14)
+
+[node name="EyesVisual" type="Polygon2D" parent="Sprite2D"]
+color = Color(0.9, 0.15, 0.15, 1)
+polygon = PackedVector2Array(8, -8, 14, -8, 14, -4, 8, -4, 8, 4, 14, 4, 14, 8, 8, 8)
+
+[node name="HitboxArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 1
+monitoring = true
+monitorable = false
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="HitboxArea"]
+shape = SubResource("CapsuleShape2D_hitbox")
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = false
+autostart = false
