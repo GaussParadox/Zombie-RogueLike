@@ -34,9 +34,11 @@ var stream_shoot: AudioStreamWAV
 var stream_bullet_hit: AudioStreamWAV
 var stream_zombie_groan: AudioStreamWAV
 var stream_shield_hit: AudioStreamWAV
+var stream_radio_blip: AudioStreamWAV
 
 # Pista actual reproduciéndose
 var _current_track: String = ""
+var _music_tween: Tween
 
 
 func _ready() -> void:
@@ -133,6 +135,11 @@ func play_shield_hit(pitch_scale: float = 1.0, volume_db: float = 0.0) -> void:
 	play_sfx(stream_shield_hit, pitch_scale, volume_db)
 
 
+## Efecto de blip de teletipo / radio para diálogos narrativos.
+func play_radio_blip(pitch_scale: float = 1.0, volume_db: float = -8.0) -> void:
+	play_sfx(stream_radio_blip, pitch_scale, volume_db)
+
+
 # ===========================================================================
 #  SÍNTESIS PROCEDURAL (AudioStreamWAV PCM 16-bit)
 # ===========================================================================
@@ -142,6 +149,7 @@ func _synthesize_all_audio() -> void:
 	stream_bullet_hit = _synth_bullet_hit()
 	stream_zombie_groan = _synth_zombie_groan()
 	stream_shield_hit = _synth_shield_hit()
+	stream_radio_blip = _synth_radio_blip()
 	stream_music_menu = _synth_music_menu()
 	stream_music_game = _synth_music_game()
 
@@ -244,6 +252,22 @@ func _synth_shield_hit() -> AudioStreamWAV:
 		var ring2 := sin(TAU * 1320.0 * t) * 0.25
 		var sizzle := (randf() * 2.0 - 1.0) * 0.4 * exp(-t * 30.0)
 		samples[i] = (ring1 + ring2 + sizzle) * env
+	return _create_wav(samples, rate, false)
+
+
+## Blip de teletipo/radio: pitido corto y sutil para avance de texto de diálogos.
+func _synth_radio_blip() -> AudioStreamWAV:
+	var rate := 22050
+	var duration := 0.04
+	var count := int(rate * duration)
+	var samples := PackedFloat32Array()
+	samples.resize(count)
+
+	for i in count:
+		var t := float(i) / rate
+		var env := exp(-t * 85.0)
+		var beep := sin(TAU * 1250.0 * t) * 0.35
+		samples[i] = beep * env
 	return _create_wav(samples, rate, false)
 
 

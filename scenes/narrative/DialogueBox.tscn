@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://dialogue_box_scene"]
+
+[ext_resource type="Script" path="res://scenes/narrative/DialogueBox.gd" id="1_dialogue"]
+
+[node name="DialogueBox" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_dialogue")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderRow" type="HBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SpeakerLabel" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "OPERADOR RAMOS"
+
+[node name="CallsignLabel" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "[CANAL TÁCTICO // 4.8 MHz]"
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DialogueLabel" type="RichTextLabel" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Texto de transmisión..."
+fit_content = true
+
+[node name="FooterRow" type="HBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+theme_override_constants/separation = 15
+
+[node name="SkipButton" type="Button" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FooterRow"]
+custom_minimum_size = Vector2(130, 32)
+layout_mode = 2
+text = "Saltar [Tab]"
+
+[node name="NextButton" type="Button" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FooterRow"]
+custom_minimum_size = Vector2(160, 32)
+layout_mode = 2
+text = "Continuar [Espacio]"

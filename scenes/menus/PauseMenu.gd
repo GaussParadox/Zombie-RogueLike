@@ -14,6 +14,8 @@ func _ready() -> void:
 	hide()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if SceneManager.is_transitioning():
+		return
 	if event.is_action_pressed("ui_cancel"):
 		if visible:
 			_on_resume_pressed()

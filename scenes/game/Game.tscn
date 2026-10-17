@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://game_scene"]
+[gd_scene load_steps=6 format=3 uid="uid://game_scene"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_game"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/hud/HUD.tscn" id="3_hud"]
 [ext_resource type="PackedScene" path="res://scenes/menus/PauseMenu.tscn" id="4_pause"]
+[ext_resource type="PackedScene" path="res://scenes/narrative/DialogueBox.tscn" id="5_dialogue"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_game")
@@ -14,3 +15,5 @@ script = ExtResource("1_game")
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_pause")]
 process_mode = 3
+
+[node name="DialogueBox" parent="." instance=ExtResource("5_dialogue")]

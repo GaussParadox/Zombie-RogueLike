@@ -16,42 +16,71 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.08, 0.02, 0.02, 1)
+color = Color(0.06, 0.02, 0.02, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -100.0
-offset_right = 200.0
-offset_bottom = 100.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
 alignment = 1
-theme_override_constants/separation = 24
+theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "GAME OVER"
+theme_override_colors/font_color = Color(0.9, 0.15, 0.15, 1)
+theme_override_font_sizes/font_size = 42
+text = "GAME OVER // BAJA EN COMBATE"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 48
-theme_override_colors/font_color = Color(0.9, 0.1, 0.1, 1)
 
-[node name="SubTitle" type="Label" parent="VBoxContainer"]
+[node name="SubTitle" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Los zombis te han derrotado..."
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "SECTOR C-4 — PROTOCOLO DE AISLAMIENTO FALLIDO"
+horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="VBoxContainer"]
+[node name="NarrativePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(300, 50)
-text = "Reintentar"
+size_flags_vertical = 3
 
-[node name="MainMenuButton" type="Button" parent="VBoxContainer"]
+[node name="NarrativeMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/NarrativePanel"]
 layout_mode = 2
-custom_minimum_size = Vector2(300, 50)
-text = "Volver al Menú"
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 18
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/NarrativePanel/NarrativeMargin"]
+layout_mode = 2
+
+[node name="NarrativeText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NarrativePanel/NarrativeMargin/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Cargando registro..."
+fit_content = true
+
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 30
+
+[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+text = "Reintentar Misión [R]"
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+text = "Volver al Menú [ESC]"
